@@ -1,0 +1,802 @@
+{
+  "rows": [
+    {
+      "label": "MARKETS",
+      "symbols": [
+        [
+          "FOREXCOM:SPXUSD",
+          "S&P 500"
+        ],
+        [
+          "FOREXCOM:NSXUSD",
+          "NASDAQ 100"
+        ],
+        [
+          "FOREXCOM:DJI",
+          "DOW 30"
+        ],
+        [
+          "CAPITALCOM:VIX",
+          "VIX"
+        ],
+        [
+          "CAPITALCOM:DXY",
+          "DOLLAR IDX"
+        ],
+        [
+          "FRED:DGS10",
+          "US 10Y YIELD"
+        ],
+        [
+          "FX:EURUSD",
+          "EUR/USD"
+        ],
+        [
+          "FX:GBPUSD",
+          "GBP/USD"
+        ],
+        [
+          "FX:USDJPY",
+          "USD/JPY"
+        ]
+      ]
+    },
+    {
+      "label": "TOP 30 STOCKS",
+      "symbols": [
+        [
+          "NASDAQ:MU",
+          "MU"
+        ],
+        [
+          "NASDAQ:NVDA",
+          "NVDA"
+        ],
+        [
+          "NASDAQ:SNDK",
+          "SNDK"
+        ],
+        [
+          "NASDAQ:META",
+          "META"
+        ],
+        [
+          "NASDAQ:TSLA",
+          "TSLA"
+        ],
+        [
+          "NASDAQ:SPCX",
+          "SPCX"
+        ],
+        [
+          "NASDAQ:AAPL",
+          "AAPL"
+        ],
+        [
+          "NASDAQ:AMD",
+          "AMD"
+        ],
+        [
+          "NASDAQ:MSFT",
+          "MSFT"
+        ],
+        [
+          "NASDAQ:INTC",
+          "INTC"
+        ],
+        [
+          "NASDAQ:AMZN",
+          "AMZN"
+        ],
+        [
+          "NASDAQ:AVGO",
+          "AVGO"
+        ],
+        [
+          "NASDAQ:GOOG",
+          "GOOG"
+        ],
+        [
+          "NASDAQ:MRVL",
+          "MRVL"
+        ],
+        [
+          "NYSE:DELL",
+          "DELL"
+        ],
+        [
+          "NASDAQ:PLTR",
+          "PLTR"
+        ],
+        [
+          "NASDAQ:LITE",
+          "LITE"
+        ],
+        [
+          "NYSE:ORCL",
+          "ORCL"
+        ],
+        [
+          "NYSE:BE",
+          "BE"
+        ],
+        [
+          "NASDAQ:MRNA",
+          "MRNA"
+        ],
+        [
+          "NASDAQ:MSTR",
+          "MSTR"
+        ],
+        [
+          "NASDAQ:NBIS",
+          "NBIS"
+        ],
+        [
+          "NASDAQ:STX",
+          "STX"
+        ],
+        [
+          "NASDAQ:AMAT",
+          "AMAT"
+        ],
+        [
+          "NASDAQ:WDC",
+          "WDC"
+        ],
+        [
+          "NASDAQ:CRWD",
+          "CRWD"
+        ],
+        [
+          "NYSE:CRM",
+          "CRM"
+        ],
+        [
+          "NASDAQ:LRCX",
+          "LRCX"
+        ],
+        [
+          "NYSE:LLY",
+          "LLY"
+        ],
+        [
+          "NASDAQ:PANW",
+          "PANW"
+        ]
+      ]
+    },
+    {
+      "label": "TOP 30 CRYPTO",
+      "symbols": [
+        [
+          "BINANCE:BTCUSDT",
+          "BTC"
+        ],
+        [
+          "BINANCE:ETHUSDT",
+          "ETH"
+        ],
+        [
+          "BINANCE:SOLUSDT",
+          "SOL"
+        ],
+        [
+          "BINANCE:XRPUSDT",
+          "XRP"
+        ],
+        [
+          "BINANCE:NEARUSDT",
+          "NEAR"
+        ],
+        [
+          "BINANCE:HYPEUSDT",
+          "HYPE"
+        ],
+        [
+          "BINANCE:ADAUSDT",
+          "ADA"
+        ],
+        [
+          "BINANCE:STRKUSDT",
+          "STRK"
+        ],
+        [
+          "BINANCE:SUIUSDT",
+          "SUI"
+        ],
+        [
+          "BINANCE:BNBUSDT",
+          "BNB"
+        ],
+        [
+          "BINANCE:UNIUSDT",
+          "UNI"
+        ],
+        [
+          "BINANCE:ZECUSDT",
+          "ZEC"
+        ],
+        [
+          "BINANCE:DOGEUSDT",
+          "DOGE"
+        ],
+        [
+          "BINANCE:WLDUSDT",
+          "WLD"
+        ],
+        [
+          "BINANCE:MAGICUSDT",
+          "MAGIC"
+        ],
+        [
+          "BINANCE:TRXUSDT",
+          "TRX"
+        ],
+        [
+          "BINANCE:ENAUSDT",
+          "ENA"
+        ],
+        [
+          "BINANCE:AVAXUSDT",
+          "AVAX"
+        ],
+        [
+          "BINANCE:AAVEUSDT",
+          "AAVE"
+        ],
+        [
+          "BINANCE:LINKUSDT",
+          "LINK"
+        ],
+        [
+          "BINANCE:LTCUSDT",
+          "LTC"
+        ],
+        [
+          "BINANCE:DOTUSDT",
+          "DOT"
+        ],
+        [
+          "BINANCE:FILUSDT",
+          "FIL"
+        ],
+        [
+          "BINANCE:OPUSDT",
+          "OP"
+        ],
+        [
+          "BINANCE:ONDOUSDT",
+          "ONDO"
+        ],
+        [
+          "BINANCE:BCHUSDT",
+          "BCH"
+        ],
+        [
+          "BINANCE:ATOMUSDT",
+          "ATOM"
+        ],
+        [
+          "BINANCE:FETUSDT",
+          "FET"
+        ],
+        [
+          "BINANCE:PENGUUSDT",
+          "PENGU"
+        ],
+        [
+          "BINANCE:PUMPUSDT",
+          "PUMP"
+        ]
+      ]
+    },
+    {
+      "label": "TOP 30 COMMODITIES",
+      "symbols": [
+        [
+          "TVC:USOIL",
+          "WTI CRUDE"
+        ],
+        [
+          "TVC:UKOIL",
+          "BRENT"
+        ],
+        [
+          "TVC:GOLD",
+          "GOLD"
+        ],
+        [
+          "CAPITALCOM:NATURALGAS",
+          "NAT GAS"
+        ],
+        [
+          "TVC:SILVER",
+          "SILVER"
+        ],
+        [
+          "CAPITALCOM:XCUUSD",
+          "COPPER"
+        ],
+        [
+          "CAPITALCOM:SOYBEAN",
+          "SOYBEANS"
+        ],
+        [
+          "CAPITALCOM:CORN",
+          "CORN"
+        ],
+        [
+          "CAPITALCOM:GASOLINE",
+          "GASOLINE"
+        ],
+        [
+          "CAPITALCOM:HEATINGOIL",
+          "HEATING OIL"
+        ],
+        [
+          "CAPITALCOM:GASOIL",
+          "GASOIL"
+        ],
+        [
+          "CAPITALCOM:SOYBEANOIL",
+          "SOY OIL"
+        ],
+        [
+          "CAPITALCOM:SOYBEANMEAL",
+          "SOY MEAL"
+        ],
+        [
+          "CAPITALCOM:WHEAT",
+          "WHEAT"
+        ],
+        [
+          "CAPITALCOM:SB",
+          "SUGAR"
+        ],
+        [
+          "TVC:PLATINUM",
+          "PLATINUM"
+        ],
+        [
+          "CAPITALCOM:LIVECATTLE",
+          "LIVE CATTLE"
+        ],
+        [
+          "CAPITALCOM:COFFEE",
+          "COFFEE"
+        ],
+        [
+          "CAPITALCOM:COCOA",
+          "COCOA"
+        ],
+        [
+          "CAPITALCOM:LEANHOGS",
+          "LEAN HOGS"
+        ],
+        [
+          "CAPITALCOM:COTTON",
+          "COTTON"
+        ],
+        [
+          "PEPPERSTONE:ALUMINIUM",
+          "ALUMINIUM"
+        ],
+        [
+          "TVC:PALLADIUM",
+          "PALLADIUM"
+        ],
+        [
+          "CAPITALCOM:NICKEL",
+          "NICKEL"
+        ],
+        [
+          "PEPPERSTONE:ZINC",
+          "ZINC"
+        ],
+        [
+          "CAPITALCOM:TSI",
+          "IRON ORE"
+        ],
+        [
+          "CAPITALCOM:FEEDERCATTLE",
+          "FEEDER CATTLE"
+        ],
+        [
+          "CAPITALCOM:LEAD",
+          "LEAD"
+        ],
+        [
+          "CAPITALCOM:OATS",
+          "OATS"
+        ],
+        [
+          "CAPITALCOM:RR",
+          "ROUGH RICE"
+        ]
+      ]
+    }
+  ],
+  "news": [
+    {
+      "name": "Google News · Kuwait",
+      "url": "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Kuwait+when:2d",
+      "limit": 15
+    },
+    {
+      "name": "Google News · الكويت",
+      "url": "https://news.google.com/rss/search?hl=ar&gl=KW&ceid=KW:ar&q=%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA+when:1d",
+      "limit": 12
+    },
+    {
+      "name": "Kuwait Times",
+      "url": "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:kuwaittimes.com+when:2d"
+    },
+    {
+      "name": "Times Kuwait",
+      "url": "https://timeskuwait.com/feed/"
+    },
+    {
+      "name": "Google News · Gulf",
+      "url": "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Saudi+OR+Iraq+OR+UAE+OR+Qatar+OR+Bahrain+OR+Oman+when:1d",
+      "limit": 12
+    },
+    {
+      "name": "Al Jazeera",
+      "url": "https://www.aljazeera.com/xml/rss/all.xml"
+    },
+    {
+      "name": "Al Arabiya",
+      "url": "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:english.alarabiya.net+when:1d"
+    },
+    {
+      "name": "Arab News",
+      "url": "https://www.arabnews.com/rss.xml"
+    },
+    {
+      "name": "Asharq Al-Awsat",
+      "url": "https://english.aawsat.com/feed"
+    },
+    {
+      "name": "The National",
+      "url": "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml"
+    },
+    {
+      "name": "Gulf News",
+      "url": "https://gulfnews.com/feed"
+    },
+    {
+      "name": "Middle East Eye",
+      "url": "https://www.middleeasteye.net/rss"
+    },
+    {
+      "name": "Al-Monitor",
+      "url": "https://www.al-monitor.com/rss"
+    },
+    {
+      "name": "BBC Middle East",
+      "url": "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml"
+    },
+    {
+      "name": "Press TV",
+      "url": "https://www.presstv.ir/rss.xml"
+    },
+    {
+      "name": "Tehran Times",
+      "url": "https://www.tehrantimes.com/rss"
+    },
+    {
+      "name": "Iran International",
+      "url": "https://www.iranintl.com/en/feed"
+    },
+    {
+      "name": "Google News · Iran",
+      "url": "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Iran+when:1d"
+    },
+    {
+      "name": "RT",
+      "url": "https://www.rt.com/rss/news/"
+    },
+    {
+      "name": "BBC عربي",
+      "url": "https://feeds.bbci.co.uk/arabic/rss.xml"
+    },
+    {
+      "name": "الجزيرة",
+      "url": "https://www.aljazeera.net/aljazeerarss/a7c186be-1baa-4bd4-9d80-a84db769f779/73d0e1b4-532f-45ef-b135-bfdff8b8cab9"
+    },
+    {
+      "name": "العربية",
+      "url": "https://news.google.com/rss/search?hl=ar&gl=KW&ceid=KW:ar&q=site:alarabiya.net+when:1d"
+    },
+    {
+      "name": "RT عربي",
+      "url": "https://arabic.rt.com/rss/"
+    },
+    {
+      "name": "CNBC Markets",
+      "url": "https://www.cnbc.com/id/10000664/device/rss/rss.html"
+    },
+    {
+      "name": "CNBC Economy",
+      "url": "https://www.cnbc.com/id/20910258/device/rss/rss.html"
+    },
+    {
+      "name": "MarketWatch",
+      "url": "https://feeds.content.dowjones.io/public/rss/mw_marketpulse"
+    },
+    {
+      "name": "Investing.com",
+      "url": "https://www.investing.com/rss/news_25.rss"
+    },
+    {
+      "name": "BBC Business",
+      "url": "https://feeds.bbci.co.uk/news/business/rss.xml"
+    }
+  ],
+  "clocks": [
+    [
+      "NEW YORK",
+      "America/New_York"
+    ],
+    [
+      "LONDON",
+      "Europe/London"
+    ],
+    [
+      "TOKYO",
+      "Asia/Tokyo"
+    ]
+  ],
+  "news_priority": [
+    {
+      "region": "KUWAIT",
+      "color": "#00a651",
+      "keywords": [
+        "Kuwait",
+        "Kuwaiti",
+        "Kuwaitis",
+        "KUNA",
+        "Boursa Kuwait",
+        "Kuwait Petroleum",
+        "KPC",
+        "الكويت",
+        "كويتي",
+        "الكويتي",
+        "كونا"
+      ],
+      "max": 15
+    },
+    {
+      "region": "NEIGHBOURS",
+      "color": "#14b8a6",
+      "keywords": [
+        "Saudi",
+        "Saudis",
+        "Riyadh",
+        "Jeddah",
+        "Aramco",
+        "Mohammed bin Salman",
+        "Iraq",
+        "Iraqi",
+        "Iraqis",
+        "Baghdad",
+        "Basra",
+        "Kurdistan",
+        "Erbil",
+        "السعودية",
+        "سعودي",
+        "السعودي",
+        "الرياض",
+        "جدة",
+        "أرامكو",
+        "العراق",
+        "عراقي",
+        "العراقي",
+        "بغداد",
+        "البصرة",
+        "كردستان",
+        "أربيل"
+      ],
+      "max": 12
+    },
+    {
+      "region": "ARAB WORLD",
+      "color": "#f5a524",
+      "keywords": [
+        "UAE",
+        "Emirati",
+        "Emirates",
+        "Dubai",
+        "Abu Dhabi",
+        "Sharjah",
+        "Qatar",
+        "Qatari",
+        "Doha",
+        "Bahrain",
+        "Bahraini",
+        "Manama",
+        "Oman",
+        "Omani",
+        "Muscat",
+        "GCC",
+        "Gulf states",
+        "Gulf Cooperation",
+        "Arab",
+        "Arabs",
+        "Arabian",
+        "Arab League",
+        "Jordan",
+        "Jordanian",
+        "Amman",
+        "Egypt",
+        "Egyptian",
+        "Cairo",
+        "Suez",
+        "Syria",
+        "Syrian",
+        "Damascus",
+        "Lebanon",
+        "Lebanese",
+        "Beirut",
+        "Hezbollah",
+        "Yemen",
+        "Yemeni",
+        "Houthi",
+        "Houthis",
+        "Sanaa",
+        "Aden",
+        "Palestine",
+        "Palestinian",
+        "Palestinians",
+        "Gaza",
+        "West Bank",
+        "Hamas",
+        "Libya",
+        "Libyan",
+        "Tunisia",
+        "Tunisian",
+        "Algeria",
+        "Algerian",
+        "Morocco",
+        "Moroccan",
+        "Sudan",
+        "Sudanese",
+        "Khartoum",
+        "Mauritania",
+        "Somalia",
+        "Djibouti",
+        "الإمارات",
+        "إماراتي",
+        "الإماراتي",
+        "دبي",
+        "أبوظبي",
+        "أبو ظبي",
+        "الشارقة",
+        "قطر",
+        "قطري",
+        "القطري",
+        "الدوحة",
+        "البحرين",
+        "بحريني",
+        "البحريني",
+        "عمان",
+        "عماني",
+        "العماني",
+        "مسقط",
+        "الخليج",
+        "خليجي",
+        "الخليجي",
+        "عربي",
+        "العربي",
+        "الجامعة العربية",
+        "الأردن",
+        "أردني",
+        "الأردني",
+        "مصر",
+        "مصري",
+        "المصري",
+        "القاهرة",
+        "سوريا",
+        "سوري",
+        "السوري",
+        "دمشق",
+        "لبنان",
+        "لبناني",
+        "اللبناني",
+        "بيروت",
+        "حزب الله",
+        "اليمن",
+        "يمني",
+        "اليمني",
+        "الحوثي",
+        "الحوثيين",
+        "صنعاء",
+        "عدن",
+        "فلسطين",
+        "فلسطيني",
+        "الفلسطيني",
+        "غزة",
+        "الضفة",
+        "حماس",
+        "ليبيا",
+        "ليبي",
+        "الليبي",
+        "تونس",
+        "تونسي",
+        "الجزائر",
+        "جزائري",
+        "المغرب",
+        "مغربي",
+        "السودان",
+        "سوداني",
+        "الصومال",
+        "جيبوتي",
+        "موريتانيا"
+      ],
+      "max": 12
+    },
+    {
+      "region": "IRAN",
+      "color": "#a855f7",
+      "keywords": [
+        "Iran",
+        "Iranian",
+        "Iranians",
+        "Tehran",
+        "Khamenei",
+        "Pezeshkian",
+        "IRGC",
+        "Hormuz",
+        "إيران",
+        "إيراني",
+        "الإيراني",
+        "طهران",
+        "خامنئي",
+        "بزشكيان",
+        "الحرس الثوري",
+        "هرمز"
+      ],
+      "max": 10
+    },
+    {
+      "region": "REGION",
+      "color": "#3b82f6",
+      "keywords": [
+        "Middle East",
+        "Mideast",
+        "Israel",
+        "Israeli",
+        "Netanyahu",
+        "Turkey",
+        "Turkish",
+        "Türkiye",
+        "Erdogan",
+        "Ankara",
+        "OPEC",
+        "OPEC+",
+        "Red Sea",
+        "Persian Gulf",
+        "Pakistan",
+        "Afghanistan",
+        "Cyprus",
+        "الشرق الأوسط",
+        "إسرائيل",
+        "إسرائيلي",
+        "الإسرائيلي",
+        "نتنياهو",
+        "تركيا",
+        "التركي",
+        "أردوغان",
+        "أوبك",
+        "البحر الأحمر",
+        "باكستان",
+        "أفغانستان",
+        "قبرص"
+      ],
+      "max": 8
+    }
+  ],
+  "news_max_age_hours": 48,
+  "news_general_max": 20
+}

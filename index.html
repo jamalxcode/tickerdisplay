@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ticker Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@500;700&family=Noto+Kufi+Arabic:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #05070b;
+    --panel: #0c1119;
+    --line: #1c2533;
+    --text: #e8edf4;
+    --muted: #8593a8;
+    --accent: #2f7bff;
+    --red: #e5243b;
+    --green: #22c55e;
+    --amber: #f5a524;
+    --status-h: 56px;
+    --tape-scale: 1.75;      /* TradingView widgets are tiny; scale them up */
+    --news-speed: 121;    /* px per second */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--bg); color: var(--text);
+    font-family: Inter, system-ui, sans-serif; cursor: none; user-select: none; }
+  body { display: flex; flex-direction: column; }
+
+  /* ---- status bar ---- */
+  .status { height: var(--status-h); flex: none; display: flex; align-items: center; gap: 28px;
+    padding: 0 20px; background: linear-gradient(#0f1622, #0a0f17); border-bottom: 2px solid var(--accent); }
+  .live { background: var(--red); color: #fff; font: 700 18px/1 'Barlow Condensed'; letter-spacing: .08em;
+    padding: 6px 10px; border-radius: 3px; display: flex; align-items: center; gap: 7px; }
+  .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: pulse 1.4s infinite; }
+  @keyframes pulse { 50% { opacity: .25; } }
+  .time { font: 700 34px/1 'Barlow Condensed'; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+  .market { font: 600 20px/1 'Barlow Condensed'; letter-spacing: .06em; display: flex; align-items: center; gap: 8px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .clocks { margin-left: auto; display: flex; gap: 26px; }
+  .clock { font: 600 20px/1 'Barlow Condensed'; color: var(--muted); letter-spacing: .05em; }
+  .clock b { color: var(--text); font-weight: 600; margin-left: 6px; font-variant-numeric: tabular-nums; }
+  .date { font: 600 20px/1 'Barlow Condensed'; color: var(--muted); letter-spacing: .05em; }
+
+  /* ---- ticker tape rows ---- */
+  .row { flex: none; display: flex; border-bottom: 1px solid var(--line); background: var(--panel); overflow: hidden; }
+  .label { flex: none; width: 118px; display: flex; align-items: center; justify-content: center; text-align: center;
+    background: #111a27; border-right: 3px solid var(--accent); font: 700 17px/1.05 'Barlow Condensed';
+    letter-spacing: .08em; color: #b9c6da; padding: 0 8px; }
+  .tape { flex: 1; position: relative; overflow: hidden; }
+  .tape-inner { position: absolute; top: 0; left: 0; transform-origin: top left;
+    transform: scale(var(--tape-scale)); }
+  .tape-inner .tradingview-widget-copyright { display: none; }
+
+  /* ---- news crawl ---- */
+  .news { flex: 1; display: flex; background: #0a0d13; min-height: 0; }
+  .news .label { background: var(--red); border-right-color: #ff5a6c; color: #fff; font-size: 22px; }
+  .crawl { flex: 1; position: relative; overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent 0, #000 40px, #000 calc(100% - 40px), transparent); }
+  .track { position: absolute; top: 0; bottom: 0; left: 0; display: flex; align-items: center; white-space: nowrap; will-change: transform; }
+  .item { display: inline-flex; align-items: center; gap: 14px; padding-right: 56px; font: 600 40px/1 'Barlow Condensed', 'Noto Kufi Arabic'; letter-spacing: .01em; }
+  .item .ttl:lang(ar), .item .ttl[dir=rtl] { font: 600 32px/1.2 'Noto Kufi Arabic'; letter-spacing: 0; }
+  .item .region { font: 700 17px/1 Inter; letter-spacing: .06em; color: #fff; padding: 6px 9px; border-radius: 3px; }
+  .item .src { font: 700 17px/1 Inter; letter-spacing: .06em; text-transform: uppercase; color: var(--amber);
+    border: 1.5px solid currentColor; padding: 5px 8px; border-radius: 3px; }
+  .item .new { font: 700 17px/1 Inter; letter-spacing: .06em; background: var(--red); color: #fff; padding: 6px 8px; border-radius: 3px; }
+  .item .age { font: 500 20px/1 Inter; color: var(--muted); }
+  .item::after { content: "■"; color: var(--accent); font-size: 18px; margin-left: 42px; }
+  .empty { color: var(--muted); font: 600 30px 'Barlow Condensed'; padding-left: 24px; }
+</style>
+</head>
+<body>
+  <div class="status">
+    <div class="live">LIVE</div>
+    <div class="time" id="time">--:--:--</div>
+    <div class="market" id="market"><span class="dot"></span><span>NYSE</span></div>
+    <div class="clocks" id="clocks"></div>
+    <div class="date" id="date"></div>
+  </div>
+  <div id="rows"></div>
+  <div class="news">
+    <div class="label">TOP<br>NEWS</div>
+    <div class="crawl"><div class="track" id="track"><span class="empty">Loading headlines…</span></div></div>
+  </div>
+
+<script>
+const TAPE_HEIGHT = 46;   // native height of TradingView's ticker tape (px, before scaling)
+const LOGO_SPACE = 48;   // extra widget width so the TradingView badge sits past the screen edge
+
+async function main() {
+  const cfg = await (await fetch('config.json', { cache: 'no-store' })).json();
+  const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tape-scale'));
+
+  // ---------- ticker tape rows ----------
+  const rows = document.getElementById('rows');
+  for (const r of cfg.rows) {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.style.height = Math.round(TAPE_HEIGHT * scale) + 'px';
+    row.innerHTML = `<div class="label">${r.label}</div><div class="tape"><div class="tape-inner"></div></div>`;
+    rows.appendChild(row);
+    const tape = row.querySelector('.tape'), inner = row.querySelector('.tape-inner');
+    const fit = () => { inner.style.width = (tape.clientWidth / scale + LOGO_SPACE) + "px"; };  // push the TV badge off-screen
+    fit(); addEventListener('resize', fit);
+
+    inner.innerHTML = '<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div>';
+    const s = document.createElement('script');
+    s.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+    s.async = true;
+    s.text = JSON.stringify({
+      symbols: r.symbols.map(([proName, title]) => ({ proName, title })),
+      showSymbolLogo: true, isTransparent: true, displayMode: 'adaptive', colorTheme: 'dark', locale: 'en'
+    });
+    inner.firstChild.appendChild(s);
+  }
+
+  // ---------- clocks & market status ----------
+  const clocks = document.getElementById('clocks');
+  clocks.innerHTML = cfg.clocks.map(([n]) => `<div class="clock">${n}<b></b></div>`).join('');
+  const fmt = (tz, opts) => new Intl.DateTimeFormat('en-GB', { timeZone: tz, ...opts });
+  const hm = tz => fmt(tz, { hour: '2-digit', minute: '2-digit', hour12: false });
+  function marketStatus() {
+    const p = Object.fromEntries(fmt('America/New_York', { weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false })
+      .formatToParts(new Date()).map(x => [x.type, x.value]));
+    const m = (+p.hour % 24) * 60 + +p.minute, wk = !['Sat', 'Sun'].includes(p.weekday);
+    if (!wk) return ['NYSE CLOSED', '#5b6678'];
+    if (m >= 570 && m < 960) return ['NYSE OPEN', 'var(--green)'];
+    if (m >= 240 && m < 570) return ['PRE-MARKET', 'var(--amber)'];
+    if (m >= 960 && m < 1200) return ['AFTER HOURS', 'var(--amber)'];
+    return ['NYSE CLOSED', '#5b6678'];
+  }
+  function tick() {
+    const now = new Date();
+    document.getElementById('time').textContent = now.toLocaleTimeString('en-GB', { hour12: false });
+    document.getElementById('date').textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).toUpperCase();
+    [...clocks.children].forEach((el, i) => el.querySelector('b').textContent = hm(cfg.clocks[i][1]).format(now));
+    const [txt, col] = marketStatus(), mk = document.getElementById('market');
+    mk.lastChild.textContent = txt; mk.firstChild.style.background = col;
+  }
+  tick(); setInterval(tick, 1000);
+
+  // ---------- news crawl ----------
+  const track = document.getElementById('track');
+  let items = [], pending = null, next = 0, offset = 0, last = performance.now();
+  const speed = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--news-speed'));
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function ago(ts) {
+    const m = Math.max(0, Math.round((Date.now() / 1000 - ts) / 60));
+    return m < 60 ? `${m}m ago` : m < 1440 ? `${Math.round(m / 60)}h ago` : '';
+  }
+  function makeItem(it) {
+    const el = document.createElement('span');
+    el.className = 'item';
+    const fresh = it.ts && Date.now() / 1000 - it.ts < 1800;
+    const rtl = /[\u0600-\u06FF]/.test(it.title);
+    el.innerHTML = (fresh ? '<span class="new">NEW</span>' : '')
+      + (it.region ? `<span class="region" style="background:${it.color}">${esc(it.region)}</span>` : '')
+      + `<span class="src">${esc(it.source)}</span>`
+      + `<span class="ttl" dir="${rtl ? 'rtl' : 'ltr'}">${esc(it.title)}</span>`
+      + `<span class="age">${it.ts ? ago(it.ts) : ''}</span>`;
+    return el;
+  }
+  function fill() {   // keep the track at least 2 screens wide
+    while (items.length && track.scrollWidth - offset < track.parentElement.clientWidth * 2) {
+      if (next >= items.length) {       // finished a full cycle: swap in the latest headlines
+        if (pending) { items = pending; pending = null; }
+        next = 0;
+      }
+      track.appendChild(makeItem(items[next++]));
+    }
+  }
+  async function loadNews() {
+    try {
+      const fresh = await (await fetch('/news', { cache: 'no-store' })).json();
+      if (fresh.length) {
+        if (!items.length) { items = fresh; next = 0; track.innerHTML = ''; offset = 0; fill(); }
+        else pending = fresh;           // priority order restarts after the current cycle ends
+      }
+    } catch (e) { /* server offline: keep showing what we have */ }
+    if (!items.length) setTimeout(loadNews, 3000);   // still starting up: try again soon
+  }
+  function frame(t) {
+    const dt = Math.min(100, t - last); last = t;
+    if (items.length) {
+      offset += speed * dt / 1000;
+      let f = track.firstElementChild;
+      while (f && f.offsetWidth <= offset) { offset -= f.offsetWidth; f.remove(); f = track.firstElementChild; }
+      fill();
+      track.style.transform = `translate3d(${-offset}px,0,0)`;
+    }
+    requestAnimationFrame(frame);
+  }
+  loadNews(); setInterval(loadNews, 120000);
+  requestAnimationFrame(frame);
+
+  // reload the whole page every 6 hours to keep widgets healthy
+  setTimeout(() => location.reload(), 6 * 3600 * 1000);
+}
+main();
+</script>
+</body>
+</html>
