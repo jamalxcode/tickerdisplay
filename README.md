@@ -8,7 +8,7 @@ A CNBC-style scrolling market and news ticker for a slim 1920×480 bar display o
 
 ## Requirements
 
-- macOS, Python 3 (built-in `/usr/bin/python3`, no packages needed)
+- macOS and [Go](https://go.dev) 1.27+ (`brew install go`). No third-party Go packages.
 - Brave Browser (launched in kiosk mode with its own profile, so your normal browser is untouched)
 
 ## Usage
@@ -17,8 +17,11 @@ A CNBC-style scrolling market and news ticker for a slim 1920×480 bar display o
 ./start.sh            # start the server and open the ticker full-screen on the bar display
 ./stop.sh             # close it
 ./install.sh          # start at login + refresh the top-30 lists every Sunday 12:00
-python3 update_lists.py   # re-rank the top-30 stocks and crypto now
+./tickerbar update-lists  # re-rank the top-30 stocks and crypto now
 ```
+
+`start.sh` builds the `tickerbar` binary automatically when it's missing or the Go code has changed.
+To build by hand: `go build -o tickerbar .`
 
 `start.sh` finds the bar display by name (`DISPLAY_NAME`, default `LC0801`) and places the window by code — no mouse needed.
 
@@ -27,9 +30,12 @@ python3 update_lists.py   # re-rank the top-30 stocks and crypto now
 | File | Purpose |
 |---|---|
 | `index.html` | The ticker page (layout, clocks, news crawl, TradingView widgets) |
-| `server.py` | Local server on port 8787: serves the page and relays/prioritises news at `/news` |
+| `main.go` | `tickerbar` command (`serve`, `update-lists`, `brave-prefs`) and the config types |
+| `server.go` | Local server on 127.0.0.1:8787: serves the page and the news at `/news`, refreshing feeds every 5 min in the background |
+| `news.go` | RSS fetching, region tagging (English + Arabic keywords), ranking and per-region caps |
 | `config.json` | Ticker symbols, news sources, region keywords and per-region slot counts, world clocks |
-| `update_lists.py` | Rebuilds the top-30 rows: stocks by 30-day avg dollar volume (TradingView screener), crypto by 24h volume (CoinGecko, stablecoins skipped), commodities by typical futures volume |
+| `lists.go` | `update-lists`: rebuilds the top-30 rows: stocks by 30-day avg dollar volume (TradingView screener), crypto by 24h volume (CoinGecko, stablecoins skipped), commodities by typical futures volume |
+| `brave.go` | `brave-prefs`: hides Brave's full-screen toolbar and analytics notice in the ticker's own profile |
 | `weekly_update.sh` | Weekly job: back up config, refresh lists, reload the bar |
 | `launchd/` | Login and weekly job templates used by `install.sh` |
 

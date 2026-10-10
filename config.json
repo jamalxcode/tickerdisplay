@@ -230,12 +230,12 @@
           "MAGIC"
         ],
         [
-          "BINANCE:TRXUSDT",
-          "TRX"
-        ],
-        [
           "BINANCE:ENAUSDT",
           "ENA"
+        ],
+        [
+          "BINANCE:TRXUSDT",
+          "TRX"
         ],
         [
           "BINANCE:AVAXUSDT",

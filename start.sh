@@ -5,13 +5,20 @@ DISPLAY_NAME="LC0801"          # part of the bar display's name
 PORT=8787
 PROFILE="$HOME/.tickerbar-brave-profile"
 
-# 1. start the local server if it isn't already running
+# 1. build the Go program if it's missing or the code changed (then restart the server)
+export PATH="/opt/homebrew/bin:/usr/local/go/bin:/usr/local/bin:$PATH"
+if [[ ! -x "$DIR/tickerbar" || -n "$(find "$DIR" -maxdepth 1 \( -name '*.go' -o -name go.mod \) -newer "$DIR/tickerbar")" ]]; then
+  (cd "$DIR" && go build -o tickerbar .) || { echo "Build failed"; exit 1; }
+  pkill -f "$DIR/tickerbar serve"; sleep 1
+fi
+
+# 2. start the local server if it isn't already running
 if ! curl -s -o /dev/null "http://localhost:$PORT/config.json"; then
-  nohup /usr/bin/python3 -I "$DIR/server.py" > "$DIR/server.log" 2>&1 &
+  nohup "$DIR/tickerbar" serve > "$DIR/server.log" 2>&1 &
   for i in {1..20}; do curl -s -o /dev/null "http://localhost:$PORT/config.json" && break; sleep 0.25; done
 fi
 
-# 2. find the bar display's position (converted to top-left screen coordinates)
+# 3. find the bar display's position (converted to top-left screen coordinates)
 #    (at login the display can take a moment to appear, so keep trying for ~90s)
 for attempt in {1..45}; do
   read X Y W H < <(osascript -l JavaScript -e "
@@ -28,17 +35,11 @@ r;")
 done
 if [[ -z "$X" ]]; then echo "Bar display '$DISPLAY_NAME' not found"; exit 1; fi
 
-# 3. close any previous ticker window, then open a fresh full-screen one on the bar
+# 4. close any previous ticker window, then open a fresh full-screen one on the bar
 pkill -f "user-data-dir=$PROFILE" 2>/dev/null; sleep 1
 
-# never show the toolbar/title bar in full screen (ticker profile only)
-PREFS="$PROFILE/Default/Preferences"
-if [[ -f "$PREFS" ]]; then
-  /usr/bin/python3 -I -c "
-import json, sys; p = sys.argv[1]; d = json.load(open(p))
-d.setdefault('browser', {})['show_fullscreen_toolbar'] = False
-json.dump(d, open(p, 'w'))" "$PREFS"
-fi
+# never show the toolbar/title bar in full screen, no analytics notice (ticker profile only)
+"$DIR/tickerbar" brave-prefs "$PROFILE"
 
 open -na "Brave Browser" --args \
   --user-data-dir="$PROFILE" \

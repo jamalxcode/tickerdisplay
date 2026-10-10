@@ -3,3 +3,4 @@ config.before.json
 config.lastweek.json
 __pycache__/
 .DS_Store
+/tickerbar

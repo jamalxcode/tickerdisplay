@@ -3,7 +3,7 @@
 DIR="${0:A:h}"
 echo "=== $(date) ==="
 cp "$DIR/config.json" "$DIR/config.lastweek.json"
-if /usr/bin/python3 -I "$DIR/update_lists.py"; then
+if "$DIR/tickerbar" update-lists; then
   "$DIR/start.sh"
 else
   echo "Update failed; keeping the existing lists"
