@@ -167,7 +167,7 @@
       ]
     },
     {
-      "label": "TOP 30 CRYPTO",
+      "label": "TOP 6 CRYPTO",
       "symbols": [
         [
           "BINANCE:BTCUSDT",
@@ -192,102 +192,6 @@
         [
           "BINANCE:HYPEUSDT",
           "HYPE"
-        ],
-        [
-          "BINANCE:ADAUSDT",
-          "ADA"
-        ],
-        [
-          "BINANCE:STRKUSDT",
-          "STRK"
-        ],
-        [
-          "BINANCE:SUIUSDT",
-          "SUI"
-        ],
-        [
-          "BINANCE:BNBUSDT",
-          "BNB"
-        ],
-        [
-          "BINANCE:UNIUSDT",
-          "UNI"
-        ],
-        [
-          "BINANCE:ZECUSDT",
-          "ZEC"
-        ],
-        [
-          "BINANCE:DOGEUSDT",
-          "DOGE"
-        ],
-        [
-          "BINANCE:WLDUSDT",
-          "WLD"
-        ],
-        [
-          "BINANCE:MAGICUSDT",
-          "MAGIC"
-        ],
-        [
-          "BINANCE:ENAUSDT",
-          "ENA"
-        ],
-        [
-          "BINANCE:TRXUSDT",
-          "TRX"
-        ],
-        [
-          "BINANCE:AVAXUSDT",
-          "AVAX"
-        ],
-        [
-          "BINANCE:AAVEUSDT",
-          "AAVE"
-        ],
-        [
-          "BINANCE:LINKUSDT",
-          "LINK"
-        ],
-        [
-          "BINANCE:LTCUSDT",
-          "LTC"
-        ],
-        [
-          "BINANCE:DOTUSDT",
-          "DOT"
-        ],
-        [
-          "BINANCE:FILUSDT",
-          "FIL"
-        ],
-        [
-          "BINANCE:OPUSDT",
-          "OP"
-        ],
-        [
-          "BINANCE:ONDOUSDT",
-          "ONDO"
-        ],
-        [
-          "BINANCE:BCHUSDT",
-          "BCH"
-        ],
-        [
-          "BINANCE:ATOMUSDT",
-          "ATOM"
-        ],
-        [
-          "BINANCE:FETUSDT",
-          "FET"
-        ],
-        [
-          "BINANCE:PENGUUSDT",
-          "PENGU"
-        ],
-        [
-          "BINANCE:PUMPUSDT",
-          "PUMP"
         ]
       ]
     },

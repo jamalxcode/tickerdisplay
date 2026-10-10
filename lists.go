@@ -1,6 +1,6 @@
 package main
 
-// Refresh config.json with the top 30 stocks, crypto and commodities by trading volume.
+// Refresh config.json with the top 30 stocks and commodities and the top 6 crypto by trading volume.
 //
 // Stocks:      TradingView screener, US common stocks ranked by 30-day average dollar volume.
 // Crypto:      CoinGecko, ranked by 24h volume (stablecoins skipped), mapped to a TradingView pair.
@@ -18,7 +18,10 @@ import (
 	"unicode"
 )
 
-const top = 30
+const (
+	top            = 30
+	topCryptoCount = 6 // stablecoins never count
+)
 
 var commodities = [][]string{ // [TradingView symbol, label] — most traded first
 	{"TVC:USOIL", "WTI CRUDE"}, {"TVC:UKOIL", "BRENT"}, {"TVC:GOLD", "GOLD"},
@@ -186,7 +189,7 @@ func topCrypto() ([][]string, error) {
 				break
 			}
 		}
-		if len(out) == top {
+		if len(out) == topCryptoCount {
 			break
 		}
 	}
@@ -229,7 +232,7 @@ func updateLists() error {
 	cfg.Rows = []Row{
 		markets,
 		{Label: "TOP 30 STOCKS", Symbols: stocks},
-		{Label: "TOP 30 CRYPTO", Symbols: crypto},
+		{Label: "TOP 6 CRYPTO", Symbols: crypto},
 		{Label: "TOP 30 COMMODITIES", Symbols: commodities[:min(top, len(commodities))]},
 	}
 	if err := saveConfig(cfg); err != nil {
