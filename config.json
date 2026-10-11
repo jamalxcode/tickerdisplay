@@ -42,131 +42,6 @@
       ]
     },
     {
-      "label": "TOP 30 STOCKS",
-      "symbols": [
-        [
-          "NASDAQ:MU",
-          "MU"
-        ],
-        [
-          "NASDAQ:NVDA",
-          "NVDA"
-        ],
-        [
-          "NASDAQ:SNDK",
-          "SNDK"
-        ],
-        [
-          "NASDAQ:META",
-          "META"
-        ],
-        [
-          "NASDAQ:TSLA",
-          "TSLA"
-        ],
-        [
-          "NASDAQ:SPCX",
-          "SPCX"
-        ],
-        [
-          "NASDAQ:AAPL",
-          "AAPL"
-        ],
-        [
-          "NASDAQ:AMD",
-          "AMD"
-        ],
-        [
-          "NASDAQ:MSFT",
-          "MSFT"
-        ],
-        [
-          "NASDAQ:INTC",
-          "INTC"
-        ],
-        [
-          "NASDAQ:AMZN",
-          "AMZN"
-        ],
-        [
-          "NASDAQ:AVGO",
-          "AVGO"
-        ],
-        [
-          "NASDAQ:GOOG",
-          "GOOG"
-        ],
-        [
-          "NASDAQ:MRVL",
-          "MRVL"
-        ],
-        [
-          "NYSE:DELL",
-          "DELL"
-        ],
-        [
-          "NASDAQ:PLTR",
-          "PLTR"
-        ],
-        [
-          "NASDAQ:LITE",
-          "LITE"
-        ],
-        [
-          "NYSE:ORCL",
-          "ORCL"
-        ],
-        [
-          "NYSE:BE",
-          "BE"
-        ],
-        [
-          "NASDAQ:MRNA",
-          "MRNA"
-        ],
-        [
-          "NASDAQ:MSTR",
-          "MSTR"
-        ],
-        [
-          "NASDAQ:NBIS",
-          "NBIS"
-        ],
-        [
-          "NASDAQ:STX",
-          "STX"
-        ],
-        [
-          "NASDAQ:AMAT",
-          "AMAT"
-        ],
-        [
-          "NASDAQ:WDC",
-          "WDC"
-        ],
-        [
-          "NASDAQ:CRWD",
-          "CRWD"
-        ],
-        [
-          "NYSE:CRM",
-          "CRM"
-        ],
-        [
-          "NASDAQ:LRCX",
-          "LRCX"
-        ],
-        [
-          "NYSE:LLY",
-          "LLY"
-        ],
-        [
-          "NASDAQ:PANW",
-          "PANW"
-        ]
-      ]
-    },
-    {
       "label": "TOP 6 CRYPTO",
       "symbols": [
         [
@@ -182,16 +57,16 @@
           "SOL"
         ],
         [
+          "BINANCE:STRKUSDT",
+          "STRK"
+        ],
+        [
           "BINANCE:XRPUSDT",
           "XRP"
         ],
         [
           "BINANCE:NEARUSDT",
           "NEAR"
-        ],
-        [
-          "BINANCE:HYPEUSDT",
-          "HYPE"
         ]
       ]
     },
@@ -440,15 +315,15 @@
   ],
   "clocks": [
     [
-      "NEW YORK",
+      "NY",
       "America/New_York"
     ],
     [
-      "LONDON",
+      "LDN",
       "Europe/London"
     ],
     [
-      "TOKYO",
+      "TYO",
       "Asia/Tokyo"
     ]
   ],

@@ -1,8 +1,7 @@
 package main
 
-// Refresh config.json with the top 30 stocks and commodities and the top 6 crypto by trading volume.
+// Refresh config.json with the top 6 crypto and top 30 commodities by trading volume.
 //
-// Stocks:      TradingView screener, US common stocks ranked by 30-day average dollar volume.
 // Crypto:      CoinGecko, ranked by 24h volume (stablecoins skipped), mapped to a TradingView pair.
 // Commodities: fixed ranking by typical global futures volume (no free live source),
 //              using free CFD symbols that TradingView widgets are allowed to show.
@@ -12,7 +11,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"sort"
 	"strings"
 	"time"
 	"unicode"
@@ -79,55 +77,6 @@ type scanResult struct {
 		S string `json:"s"`
 		D []any  `json:"d"`
 	} `json:"data"`
-}
-
-func topStocks() ([][]string, error) {
-	var res scanResult
-	err := getJSON("https://scanner.tradingview.com/america/scan", map[string]any{
-		"columns": []string{"name", "description", "close", "average_volume_30d_calc"},
-		"filter": []map[string]any{
-			{"left": "type", "operation": "equal", "right": "stock"},
-			{"left": "is_primary", "operation": "equal", "right": true},
-		},
-		"sort":  map[string]string{"sortBy": "Value.Traded", "sortOrder": "desc"},
-		"range": []int{0, 400},
-	}, &res)
-	if err != nil {
-		return nil, err
-	}
-	type row struct {
-		dollarVol        float64
-		sym, name, descr string
-	}
-	var rows []row
-	for _, r := range res.Data {
-		if len(r.D) < 4 {
-			continue
-		}
-		name, _ := r.D[0].(string)
-		descr, _ := r.D[1].(string)
-		closePx, _ := r.D[2].(float64)
-		avgVol, _ := r.D[3].(float64)
-		if closePx > 0 && avgVol > 0 {
-			rows = append(rows, row{closePx * avgVol, r.S, name, descr})
-		}
-	}
-	sort.Slice(rows, func(i, j int) bool { return rows[i].dollarVol > rows[j].dollarVol })
-
-	var out [][]string
-	seen := map[string]bool{}
-	for _, r := range rows {
-		company := strings.Split(strings.Split(strings.Split(r.descr, " Inc")[0], " Class")[0], ",")[0]
-		if seen[company] { // GOOG/GOOGL → one Alphabet
-			continue
-		}
-		seen[company] = true
-		out = append(out, []string{r.sym, r.name})
-		if len(out) == top {
-			break
-		}
-	}
-	return out, nil
 }
 
 func isAlnum(s string) bool {
@@ -201,10 +150,6 @@ func updateLists() error {
 	if err != nil {
 		return err
 	}
-	stocks, err := topStocks()
-	if err != nil {
-		return fmt.Errorf("stocks: %w", err)
-	}
 	crypto, err := topCrypto()
 	if err != nil {
 		return fmt.Errorf("crypto: %w", err)
@@ -231,7 +176,6 @@ func updateLists() error {
 
 	cfg.Rows = []Row{
 		markets,
-		{Label: "TOP 30 STOCKS", Symbols: stocks},
 		{Label: "TOP 6 CRYPTO", Symbols: crypto},
 		{Label: "TOP 30 COMMODITIES", Symbols: commodities[:min(top, len(commodities))]},
 	}
@@ -245,7 +189,6 @@ func updateLists() error {
 		}
 		return strings.Join(n, " ")
 	}
-	fmt.Println("stocks:", names(stocks))
 	fmt.Println("crypto:", names(crypto))
 	fmt.Println("commodities:", min(top, len(commodities)))
 	return nil

@@ -1,5 +1,5 @@
 #!/bin/zsh
-# Weekly: refresh the top-30 lists, then reload the ticker bar so they show up.
+# Weekly: refresh the top crypto list, then reload the ticker bar so they show up.
 DIR="${0:A:h}"
 echo "=== $(date) ==="
 cp "$DIR/config.json" "$DIR/config.lastweek.json"

@@ -16,8 +16,8 @@
     --red: #e5243b;
     --green: #22c55e;
     --amber: #f5a524;
-    --status-h: 56px;
-    --tape-scale: 1.75;      /* TradingView widgets are tiny; scale them up */
+    --status-h: 68px;
+    --tape-scale: 2.2;       /* TradingView widgets are tiny; scale them up */
     --news-speed: 121;    /* px per second */
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,29 +28,29 @@
   /* ---- status bar ---- */
   .status { position: relative; height: var(--status-h); flex: none; display: flex; align-items: center; gap: 28px;
     padding: 0 20px; background: linear-gradient(#0f1622, #0a0f17); border-bottom: 2px solid var(--accent); }
-  .live { background: var(--red); color: #fff; font: 700 18px/1 'Barlow Condensed'; letter-spacing: .08em;
+  .live { background: var(--red); color: #fff; font: 700 22px/1 'Barlow Condensed'; letter-spacing: .08em;
     padding: 6px 10px; border-radius: 3px; display: flex; align-items: center; gap: 7px; }
   .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: pulse 1.4s infinite; }
   @keyframes pulse { 50% { opacity: .25; } }
-  .time { font: 700 34px/1 'Barlow Condensed'; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
-  .market { font: 600 20px/1 'Barlow Condensed'; letter-spacing: .06em; display: flex; align-items: center; gap: 8px; }
+  .time { font: 700 42px/1 'Barlow Condensed'; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+  .market { font: 600 26px/1 'Barlow Condensed'; letter-spacing: .06em; display: flex; align-items: center; gap: 8px; }
   .dot { width: 10px; height: 10px; border-radius: 50%; }
   .btc { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: baseline; gap: 12px;
-    font: 700 32px/1 'Barlow Condensed'; letter-spacing: .02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .btc .sym { font-size: 22px; color: var(--amber); letter-spacing: .08em; }
+    font: 700 40px/1 'Barlow Condensed'; letter-spacing: .02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .btc .sym { font-size: 28px; color: var(--amber); letter-spacing: .08em; }
   .btc .px { transition: color .6s; }
   .btc .px.up { color: var(--green); transition: none; }
   .btc .px.down { color: var(--red); transition: none; }
-  .btc .chg { font-size: 22px; }
+  .btc .chg { font-size: 28px; }
   .clocks { margin-left: auto; display: flex; gap: 26px; }
-  .clock { font: 600 20px/1 'Barlow Condensed'; color: var(--muted); letter-spacing: .05em; }
+  .clock { font: 600 26px/1 'Barlow Condensed'; color: var(--muted); letter-spacing: .05em; }
   .clock b { color: var(--text); font-weight: 600; margin-left: 6px; font-variant-numeric: tabular-nums; }
-  .date { font: 600 20px/1 'Barlow Condensed'; color: var(--muted); letter-spacing: .05em; }
+  .date { font: 600 26px/1 'Barlow Condensed'; color: var(--muted); letter-spacing: .05em; }
 
   /* ---- ticker tape rows ---- */
   .row { flex: none; display: flex; border-bottom: 1px solid var(--line); background: var(--panel); overflow: hidden; }
-  .label { flex: none; width: 118px; display: flex; align-items: center; justify-content: center; text-align: center;
-    background: #111a27; border-right: 3px solid var(--accent); font: 700 17px/1.05 'Barlow Condensed';
+  .label { flex: none; width: 132px; display: flex; align-items: center; justify-content: center; text-align: center;
+    background: #111a27; border-right: 3px solid var(--accent); font: 700 21px/1.05 'Barlow Condensed';
     letter-spacing: .08em; color: #b9c6da; padding: 0 8px; }
   .tape { flex: 1; position: relative; overflow: hidden; }
   .tape-inner { position: absolute; top: 0; left: 0; transform-origin: top left;
@@ -59,19 +59,19 @@
 
   /* ---- news crawl ---- */
   .news { flex: 1; display: flex; background: #0a0d13; min-height: 0; }
-  .news .label { background: var(--red); border-right-color: #ff5a6c; color: #fff; font-size: 22px; }
+  .news .label { background: var(--red); border-right-color: #ff5a6c; color: #fff; font-size: 26px; }
   .crawl { flex: 1; position: relative; overflow: hidden;
     mask-image: linear-gradient(90deg, transparent 0, #000 40px, #000 calc(100% - 40px), transparent); }
   .track { position: absolute; top: 0; bottom: 0; left: 0; display: flex; align-items: center; white-space: nowrap; will-change: transform; }
-  .item { display: inline-flex; align-items: center; gap: 14px; padding-right: 56px; font: 600 40px/1 'Barlow Condensed', 'Noto Kufi Arabic'; letter-spacing: .01em; }
-  .item .ttl:lang(ar), .item .ttl[dir=rtl] { font: 600 32px/1.2 'Noto Kufi Arabic'; letter-spacing: 0; }
-  .item .region { font: 700 17px/1 Inter; letter-spacing: .06em; color: #fff; padding: 6px 9px; border-radius: 3px; }
-  .item .src { font: 700 17px/1 Inter; letter-spacing: .06em; text-transform: uppercase; color: var(--amber);
+  .item { display: inline-flex; align-items: center; gap: 14px; padding-right: 56px; font: 600 52px/1 'Barlow Condensed', 'Noto Kufi Arabic'; letter-spacing: .01em; }
+  .item .ttl:lang(ar), .item .ttl[dir=rtl] { font: 600 42px/1.2 'Noto Kufi Arabic'; letter-spacing: 0; }
+  .item .region { font: 700 21px/1 Inter; letter-spacing: .06em; color: #fff; padding: 6px 9px; border-radius: 3px; }
+  .item .src { font: 700 21px/1 Inter; letter-spacing: .06em; text-transform: uppercase; color: var(--amber);
     border: 1.5px solid currentColor; padding: 5px 8px; border-radius: 3px; }
-  .item .new { font: 700 17px/1 Inter; letter-spacing: .06em; background: var(--red); color: #fff; padding: 6px 8px; border-radius: 3px; }
-  .item .age { font: 500 20px/1 Inter; color: var(--muted); }
+  .item .new { font: 700 21px/1 Inter; letter-spacing: .06em; background: var(--red); color: #fff; padding: 6px 8px; border-radius: 3px; }
+  .item .age { font: 500 24px/1 Inter; color: var(--muted); }
   .item::after { content: "■"; color: var(--accent); font-size: 18px; margin-left: 42px; }
-  .empty { color: var(--muted); font: 600 30px 'Barlow Condensed'; padding-left: 24px; }
+  .empty { color: var(--muted); font: 600 40px 'Barlow Condensed'; padding-left: 24px; }
 </style>
 </head>
 <body>
@@ -120,27 +120,47 @@ async function main() {
     inner.firstChild.appendChild(s);
   }
 
-  // ---------- live BTC price (Coinbase public feed, every trade) ----------
-  function btcFeed() {
+  // ---------- live BTC price (public exchange feeds, every trade) ----------
+  // Binance first (no subscription limits); Coinbase as a fallback. Any failure or
+  // 15s of silence switches to the other feed.
+  const BTC_FEEDS = [
+    { url: 'wss://stream.binance.com:9443/ws/btcusdt@ticker',
+      parse: m => m.e === '24hrTicker' ? { p: +m.c, open: +m.o } : null },
+    { url: 'wss://ws-feed.exchange.coinbase.com',
+      hello: { type: 'subscribe', product_ids: ['BTC-USD'], channels: ['ticker'] },
+      parse: m => m.type === 'ticker' ? { p: +m.price, open: +m.open_24h } : null },
+  ];
+  function btcFeed(n = 0) {
     const box = document.getElementById('btc'), px = box.querySelector('.px'), chg = box.querySelector('.chg');
-    const money = n => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    let lastPx = 0, flashTimer;
-    const ws = new WebSocket('wss://ws-feed.exchange.coinbase.com');
-    ws.onopen = () => ws.send(JSON.stringify({ type: 'subscribe', product_ids: ['BTC-USD'], channels: ['ticker'] }));
+    const money = v => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const feed = BTC_FEEDS[n % BTC_FEEDS.length];
+    const ws = new WebSocket(feed.url);
+    let lastPx = +(px.dataset.last || 0), flashTimer, watchdog, done = false;
+    const retry = () => {                     // switch to the other feed
+      if (done) return;
+      done = true; clearTimeout(watchdog); try { ws.close(); } catch (e) {}
+      setTimeout(() => btcFeed(n + 1), 2000);
+    };
+    const arm = () => { clearTimeout(watchdog); watchdog = setTimeout(retry, 15000); };
+    ws.onopen = () => { if (feed.hello) ws.send(JSON.stringify(feed.hello)); arm(); };
     ws.onmessage = e => {
       const m = JSON.parse(e.data);
-      if (m.type !== 'ticker') return;
-      const p = +m.price, open = +m.open_24h, d = p - open, pct = d / open * 100;
-      px.textContent = '$' + money(p);
-      if (lastPx && p !== lastPx) {           // flash green/red on each tick
-        px.classList.remove('up', 'down'); px.classList.add(p > lastPx ? 'up' : 'down');
+      if (m.type === 'error') return retry();
+      const t = feed.parse(m);
+      if (!t || !t.p) return;
+      arm();
+      const d = t.p - t.open, pct = d / t.open * 100;
+      px.textContent = '$' + money(t.p);
+      if (lastPx && t.p !== lastPx) {         // flash green/red on each tick
+        px.classList.remove('up', 'down'); px.classList.add(t.p > lastPx ? 'up' : 'down');
         clearTimeout(flashTimer); flashTimer = setTimeout(() => px.classList.remove('up', 'down'), 350);
       }
-      lastPx = p;
+      lastPx = t.p; px.dataset.last = t.p;
       chg.textContent = `${d >= 0 ? '▲ +' : '▼ −'}${money(Math.abs(d))} (${d >= 0 ? '+' : '−'}${Math.abs(pct).toFixed(2)}%)`;
       chg.style.color = d >= 0 ? 'var(--green)' : 'var(--red)';
     };
-    ws.onclose = () => setTimeout(btcFeed, 5000);   // reconnect if the feed drops
+    ws.onerror = retry;
+    ws.onclose = retry;
   }
   btcFeed();
 
