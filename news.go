@@ -33,7 +33,7 @@ type Item struct {
 	Color  string  `json:"color"`
 }
 
-var httpClient = &http.Client{Timeout: 12 * time.Second}
+var httpClient = &http.Client{Timeout: 20 * time.Second}
 
 func httpGet(url string) (io.ReadCloser, error) {
 	req, err := http.NewRequest("GET", url, nil)
@@ -58,7 +58,7 @@ func httpGet(url string) (io.ReadCloser, error) {
 }
 
 func curlGet(url string) (io.ReadCloser, error) {
-	out, err := exec.Command("/usr/bin/curl", "-sfL", "--max-time", "12", "-A", "Mozilla/5.0 TickerBar", url).Output()
+	out, err := exec.Command("/usr/bin/curl", "-sfL", "--max-time", "20", "-A", "Mozilla/5.0 TickerBar", url).Output()
 	if err != nil {
 		return nil, fmt.Errorf("403 Forbidden (curl retry: %v)", err)
 	}

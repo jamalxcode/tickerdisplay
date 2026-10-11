@@ -16,7 +16,7 @@ A CNBC-style scrolling market and news ticker for a slim 1920×480 bar display o
 ```bash
 ./start.sh            # start the server and open the ticker full-screen on the bar display
 ./stop.sh             # close it
-./install.sh          # start at login + refresh the crypto list every Sunday 12:00
+./install.sh          # start at login, refresh the crypto list Sundays 12:00, watchdog every minute
 ./tickerbar update-lists  # re-rank the top crypto now
 ```
 
@@ -37,7 +37,8 @@ To build by hand: `go build -o tickerbar .`
 | `lists.go` | `update-lists`: rebuilds the price rows: top 6 crypto by 24h volume (CoinGecko, stablecoins skipped), commodities by typical futures volume |
 | `brave.go` | `brave-prefs`: hides Brave's full-screen toolbar and analytics notice in the ticker's own profile |
 | `weekly_update.sh` | Weekly job: back up config, refresh lists, reload the bar |
-| `launchd/` | Login and weekly job templates used by `install.sh` |
+| `watchdog.sh` | Every minute: if the bar display is awake but the ticker isn't on it (or the server is down), relaunch it |
+| `launchd/` | Login, weekly and watchdog job templates used by `install.sh` |
 
 ## Customising
 
