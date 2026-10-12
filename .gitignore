@@ -4,3 +4,4 @@ config.lastweek.json
 __pycache__/
 .DS_Store
 /tickerbar
+.watchdog-state

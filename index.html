@@ -93,6 +93,31 @@
 const TAPE_HEIGHT = 46;   // native height of TradingView's ticker tape (px, before scaling)
 const LOGO_SPACE = 48;   // extra widget width so the TradingView badge sits past the screen edge
 
+const TAPE_REFRESH = 30 * 60 * 1000;
+
+// Build (or rebuild) one TradingView ticker tape. A rebuild loads transparent on top of the
+// old tape (widgets don't start while hidden) and swaps in once it has fetched prices.
+function loadTape(inner, r) {
+  const old = [...inner.children];
+  const box = document.createElement('div');
+  box.className = 'tradingview-widget-container';
+  box.innerHTML = '<div class="tradingview-widget-container__widget"></div>';
+  if (old.length) Object.assign(box.style, { position: 'absolute', top: '0', left: '0', width: '100%', opacity: '0' });
+  const s = document.createElement('script');
+  s.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+  s.async = true;
+  s.text = JSON.stringify({
+    symbols: r.symbols.map(([proName, title]) => ({ proName, title })),
+    showSymbolLogo: true, isTransparent: true, displayMode: 'adaptive', colorTheme: 'dark', locale: 'en'
+  });
+  box.appendChild(s);
+  inner.appendChild(box);
+  if (old.length) setTimeout(() => {
+    old.forEach(el => el.remove());
+    Object.assign(box.style, { position: '', top: '', left: '', width: '', opacity: '' });
+  }, 10000);
+}
+
 async function main() {
   const cfg = await (await fetch('config.json', { cache: 'no-store' })).json();
   const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tape-scale'));
@@ -109,15 +134,10 @@ async function main() {
     const fit = () => { inner.style.width = (tape.clientWidth / scale + LOGO_SPACE) + "px"; };  // push the TV badge off-screen
     fit(); addEventListener('resize', fit);
 
-    inner.innerHTML = '<div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div>';
-    const s = document.createElement('script');
-    s.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
-    s.async = true;
-    s.text = JSON.stringify({
-      symbols: r.symbols.map(([proName, title]) => ({ proName, title })),
-      showSymbolLogo: true, isTransparent: true, displayMode: 'adaptive', colorTheme: 'dark', locale: 'en'
-    });
-    inner.firstChild.appendChild(s);
+    loadTape(inner, r);
+    // TradingView widgets can silently lose their data connection (e.g. across display
+    // sleep), so rebuild each row every 30 minutes, staggered so they don't all reload at once
+    setTimeout(() => setInterval(() => loadTape(inner, r), TAPE_REFRESH), cfg.rows.indexOf(r) * 60000);
   }
 
   // ---------- live BTC price (public exchange feeds, every trade) ----------

@@ -1,6 +1,7 @@
 #!/bin/zsh
 # Runs every minute: if the bar display is awake but the ticker isn't showing on it
-# (or its server is down), relaunch it. Does nothing while the display sleeps.
+# (or its server is down), relaunch it. Also reloads it when the display wakes from sleep.
+# Does nothing while the display sleeps.
 DIR="${0:A:h}"
 DISPLAY_NAME="LC0801"
 PROFILE="$HOME/.tickerbar-brave-profile"
@@ -33,7 +34,16 @@ else {
 }
 state;")
 
-if [[ "$STATE" == "missing" ]] || { [[ "$STATE" == "ok" ]] && ! curl -s -o /dev/null --max-time 5 "http://localhost:$PORT/config.json"; }; then
+# remember the display state between runs so we can spot it waking up
+STATE_FILE="$DIR/.watchdog-state"
+LAST=$(cat "$STATE_FILE" 2>/dev/null)
+echo "$STATE" > "$STATE_FILE"
+
+if [[ "$LAST" == "asleep" && "$STATE" != "asleep" && "$STATE" != "no-display" ]]; then
+  # TradingView widgets don't reconnect after the display sleeps: reload fresh on wake
+  echo "$(date '+%F %T') display woke up — reloading ticker"
+  "$DIR/start.sh"
+elif [[ "$STATE" == "missing" ]] || { [[ "$STATE" == "ok" ]] && ! curl -s -o /dev/null --max-time 5 "http://localhost:$PORT/config.json"; }; then
   echo "$(date '+%F %T') ticker not showing ($STATE) — relaunching"
   "$DIR/start.sh"
 fi

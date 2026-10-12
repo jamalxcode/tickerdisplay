@@ -37,7 +37,7 @@ To build by hand: `go build -o tickerbar .`
 | `lists.go` | `update-lists`: rebuilds the price rows: top 6 crypto by 24h volume (CoinGecko, stablecoins skipped), commodities by typical futures volume |
 | `brave.go` | `brave-prefs`: hides Brave's full-screen toolbar and analytics notice in the ticker's own profile |
 | `weekly_update.sh` | Weekly job: back up config, refresh lists, reload the bar |
-| `watchdog.sh` | Every minute: if the bar display is awake but the ticker isn't on it (or the server is down), relaunch it |
+| `watchdog.sh` | Every minute: relaunch the ticker if the bar display is awake but the ticker isn't on it (or the server is down), and reload it fresh when the display wakes from sleep |
 | `launchd/` | Login, weekly and watchdog job templates used by `install.sh` |
 
 ## Customising
