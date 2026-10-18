@@ -57,12 +57,12 @@
           "SOL"
         ],
         [
-          "BINANCE:STRKUSDT",
-          "STRK"
-        ],
-        [
           "BINANCE:XRPUSDT",
           "XRP"
+        ],
+        [
+          "BINANCE:ZECUSDT",
+          "ZEC"
         ],
         [
           "BINANCE:NEARUSDT",
