@@ -7,9 +7,18 @@ import (
 	"path/filepath"
 )
 
-// bravePrefs edits the ticker's own Brave profile: never show the toolbar/title bar in
-// full screen, and turn off the product-analytics notice (choosing "Disable").
+// bravePrefs edits the ticker's own Brave profile before each launch: never show the
+// toolbar/title bar in full screen, turn off the product-analytics notice (choosing
+// "Disable"), and forget the previous session. The ticker is force-quit on every
+// relaunch, so without that Brave restores every old ticker tab and adds a new one,
+// piling up hidden copies that each run their own TradingView widgets.
 func bravePrefs(profile string) error {
+	for _, old := range []string{"Sessions", "Current Session", "Current Tabs", "Last Session", "Last Tabs"} {
+		if err := os.RemoveAll(filepath.Join(profile, "Default", old)); err != nil {
+			return err
+		}
+	}
+
 	set := func(file string, edit func(map[string]any)) error {
 		data, err := os.ReadFile(file)
 		if os.IsNotExist(err) {
@@ -47,6 +56,10 @@ func bravePrefs(profile string) error {
 	if err := set(filepath.Join(profile, "Default", "Preferences"), func(m map[string]any) {
 		child(m, "browser")["show_fullscreen_toolbar"] = false
 		p3a(m)
+		prof := child(m, "profile") // mark the last exit as clean: no "restore pages?" either
+		prof["exit_type"] = "Normal"
+		prof["exited_cleanly"] = true
+		child(m, "session")["restore_on_startup"] = 5 // open only the URL we pass
 	}); err != nil {
 		return err
 	}
